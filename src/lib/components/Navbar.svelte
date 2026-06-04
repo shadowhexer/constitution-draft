@@ -1,7 +1,4 @@
 <script>
-	import { page } from '$app/state';
-	import Icon from './Icon.svelte';
-
 	// In Svelte 5, run an effect to physically force mutate the html attribute in the browser
 	let isDim = $state(false);
 	$effect(() => {
@@ -16,34 +13,6 @@
 			document.documentElement.setAttribute('data-theme', nextTheme);
 		});
 	});
-	// Define the Props type via destructured props
-	let { onSearch, totalResults } = $props();
-
-	// Svelte state is just plain variables
-	let filters = $state({
-		query: '',
-		articleType: 'all',
-		sortBy: 'relevance'
-	});
-
-	let isExpanded = $state(false);
-
-	// Derived state for the "Clear" button visibility
-	// This automatically recalculates when 'filters' changes
-	let hasActiveFilters = $derived(filters.query !== '' || filters.articleType !== 'all');
-
-	// Logic remains clean functions
-	let timer;
-	function handleFilterChange(key, value) {
-		filters[key] = value;
-		clearTimeout(timer);
-		timer = setTimeout(() => onSearch(filters), 300);
-	}
-
-	function clearFilters() {
-		filters = { query: '', articleType: 'all', sortBy: 'relevance' };
-		onSearch(filters);
-	}
 </script>
 
 <div
@@ -87,41 +56,5 @@
 				</label>
 			</nav>
 		</div>
-
-		{#if page.url.pathname !== '/panel'}
-			<div
-				class="space-y-3 rounded-lg border border-slate-200 dark:border-slate-700 bg-base-300 dark:bg-slate-800 p-4"
-			>
-				<div class="flex gap-2">
-					<div class="flex-1 relative">
-						<Icon
-							class="absolute left-3 top-3 w-5 h-5 text-slate-400"
-							title="magnify"
-							path="M9.5,3A6.5,6.5 0 0,1 16,9.5C16,11.11 15.41,12.59 14.44,13.73L14.71,14H15.5L20.5,19L19,20.5L14,15.5V14.71L13.73,14.44C12.59,15.41 11.11,16 9.5,16A6.5,6.5 0 0,1 3,9.5A6.5,6.5 0 0,1 9.5,3M9.5,5C7,5 5,7 5,9.5C5,12 7,14 9.5,14C12,14 14,12 14,9.5C14,7 12,5 9.5,5Z"
-						></Icon>
-						<input
-							type="text"
-							placeholder="Search articles, sections, keywords..."
-							bind:value={filters.query}
-							oninput={(e) => handleFilterChange('query', e.target.value)}
-							class="w-full pl-10 pr-4 py-2 rounded-lg border border-slate-300 dark:border-slate-600 bg-white dark:bg-slate-700 text-foreground placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-base-content/40"
-						/>
-					</div>
-
-					<button
-						onclick={() => (isExpanded = !isExpanded)}
-						class="px-3 py-2 rounded-lg border border-slate-300 dark:border-slate-600 bg-base-100 hover:bg-slate-100 dark:hover:bg-slate-700 hover:cursor-pointer transition-colors flex items-center gap-2"
-						aria-label="Toggle advanced filters"
-					>
-						<Icon
-							class="w-5 h-5"
-							title="filter-outline"
-							path="M15,19.88C15.04,20.18 14.94,20.5 14.71,20.71C14.32,21.1 13.69,21.1 13.3,20.71L9.29,16.7C9.06,16.47 8.96,16.16 9,15.87V10.75L4.21,4.62C3.87,4.19 3.95,3.56 4.38,3.22C4.57,3.08 4.78,3 5,3V3H19V3C19.22,3 19.43,3.08 19.62,3.22C20.05,3.56 20.13,4.19 19.79,4.62L15,10.75V19.88M7.04,5L11,10.06V15.58L13,17.58V10.05L16.96,5H7.04Z"
-						></Icon>
-						<span class="text-sm hidden sm:inline">Filters</span>
-					</button>
-				</div>
-			</div>
-		{/if}
 	</div>
 </div>
