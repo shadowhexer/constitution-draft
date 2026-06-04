@@ -69,7 +69,7 @@
 		<div class="flex flex-col gap-2">
 			<label for="article">Subsection</label>
 			<textarea
-				bind:value={item.content}
+				bind:value={item}
 				name="content"
 				placeholder="Content"
 				class="rounded-md border p-1 focus:outline-1

@@ -1,48 +1,21 @@
 import { error } from '@sveltejs/kit';
 
-export const load = async ({ locals }) => {
+export async function load({ fetch }) {
+	// 1. Target the rolling latest path (no commit hash)
+	// 2. Append a unique timestamp parameter to force the CDN to bypass its cache
+	const gistUrl = `https://gist.githubusercontent.com/shadowhexer/30ced42c856e969e01e50f867e8da69f/raw/constitution.json?t=${Date.now()}`;
 	try {
-		const [{ data: articleRow, error: articleError }, { data: sectionRow, error: sectionError }] =
-			await Promise.all([
-				locals.supabase.from('article').select(`
-            id:article_id,
-            name,
-            section(count),
-            summary!summary_article_id_fkey(summary_text),
-            tags(tag)`),
+		const res = await fetch(gistUrl);
 
-				locals.supabase
-					.from('section')
-					.select(
-						`id:section_id,
-						article_id,
-						name,
-						subsection(count),
-						summary!summary_section_id_fkey(summary_text),
-						tags(tag)`
-					)
-					.order('section_id', { ascending: true })
-			]);
+		if (!res.ok) {
+			throw new Error(`Failed to read dataset: ${res.status}`);
+		}
 
-		if (articleError) throw articleError;
-		if (sectionError) throw sectionError;
-
-		return {
-			articles: articleRow.map((article) => ({
-				...article,
-				summary: article.summary?.summary_text,
-				sectionCount: article.section[0]?.count || 0,
-				tag: article.tags?.tag
-			})),
-			sections: sectionRow.map((section) => ({
-				...section,
-				summary: section.summary?.summary_text,
-				subSectionCount: section.subsection[0]?.count || 0,
-				tag: section.tags?.tag
-			}))
-		};
-	} catch (e) {
-		console.error(e);
-		throw error(500, 'Internal Server Error');
+		const data = await res.json();
+		return { articles: data || [] };
+	} catch (error) {
+		console.error('Gist synchronization error:', error);
+		// Fallback graceful degradation array so your page layout doesn't crash
+		return { articles: [] };
 	}
-};
+}

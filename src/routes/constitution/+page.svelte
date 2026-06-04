@@ -42,11 +42,12 @@
 		</div>
 		<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
 			{#each data.articles as article, index (article.id)}
+				{@const sectionCount = article?.section.length}
 				<Card
 					tags={article.tag}
-					sectionCount={`${article.sectionCount} ${article.sectionCount > 1 ? 'sections' : 'section'}`}
+					sectionCount={`${sectionCount} ${sectionCount > 1 ? 'sections' : 'section'}`}
 					link={`/constitution/article/${article.id}`}
-					title={`Article ${index + 1}: ${article.name}`}
+					title={`Article ${index + 1}: ${article.article}`}
 					summary={article.summary}
 				></Card>
 			{/each}

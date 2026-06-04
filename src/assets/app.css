@@ -5,7 +5,8 @@
 		dim --prefersdark;
 }
 @variant dark (html[data-theme='dim'] &);
-
+@source "./routes/**/*.svelte";
+@source "./lib/**/*.svelte";
 :root {
 	--font-sans: 'Geist', 'Geist Fallback';
 	--font-mono: 'Geist Mono', 'Geist Mono Fallback';
