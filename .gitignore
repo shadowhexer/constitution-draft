@@ -141,3 +141,6 @@ dist
 vite.config.js.timestamp-*
 vite.config.ts.timestamp-*
 .vite/
+src/hooks.server.js
+src/lib/components/EditorField.svelte
+src/lib/components/PanelList.svelte
