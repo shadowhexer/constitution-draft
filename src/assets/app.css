@@ -1,0 +1,12 @@
+@import 'tailwindcss';
+@plugin "daisyui" {
+	themes:
+		light --default,
+		dim --prefersdark;
+}
+@variant dark (html[data-theme='dim'] &);
+
+:root {
+	--font-sans: 'Geist', 'Geist Fallback';
+	--font-mono: 'Geist Mono', 'Geist Mono Fallback';
+}
