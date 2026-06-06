@@ -5,13 +5,9 @@
 
 	// We use a derived-style getter to stay reactive
 	// This will be undefined until the page finishes loading
-	const articleId = page.params?.articleId;
-	const article = page.data.articles?.find((a) => a.id == articleId);
+	const article = $derived(page.data.articles?.find((a) => a.id == page.params?.articleId));
 </script>
 
-<svelte:head>
-	<title>{article.article} - Constitution</title>
-</svelte:head>
 <div>
 	<Header header={`Article ${article.id}: ${article.article}`} />
 	{@render children?.()}

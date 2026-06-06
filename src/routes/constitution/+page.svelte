@@ -18,7 +18,7 @@
 						Preamble
 					</p>
 					<p
-						class="line-clamp-3 text-justify text-slate-600 dark:text-slate-400 text-lg mb-6 leading-relaxed"
+						class="line-clamp-3 text-justify text-slate-600 dark:text-slate-400 md:text-lg mb-6 leading-relaxed"
 					>
 						The once sovereign kingdoms and states were united by the Spanish colonial government in
 						the name of King Felipe II, from where the name Philippines is derived from. During the

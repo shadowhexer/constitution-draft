@@ -1,16 +1,18 @@
 <script>
 	import favicon from '$lib/assets/favicon.svg';
 	import '../assets/app.css';
-	import { navigating } from '$app/state';
+	import { page } from '$app/state';
 	import Navbar from '$lib/components/Navbar.svelte';
 
 	let { children } = $props();
 
-	const name = $derived('Constitution');
+	const article = $derived(page.data.articles?.find((a) => a.id == page.params.articleId));
+	const headerName = $derived(article?.id ? `${article.article} - ` : '');
 </script>
 
 <svelte:head>
 	<link rel="icon" href={favicon} />
+	<title>{headerName}Constitution</title>
 </svelte:head>
 
 <div
