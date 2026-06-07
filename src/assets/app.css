@@ -1,3 +1,4 @@
+@import url('https://googleapis.com');
 @import 'tailwindcss';
 @plugin "daisyui" {
 	themes:
@@ -5,9 +6,7 @@
 		dim --prefersdark;
 }
 @variant dark (html[data-theme='dim'] &);
-@source "./routes/**/*.svelte";
-@source "./lib/**/*.svelte";
-:root {
-	--font-sans: 'Geist', 'Geist Fallback';
-	--font-mono: 'Geist Mono', 'Geist Mono Fallback';
+@theme {
+	--font-sans: 'Open Sans', Arial, sans-serif;
+	--font-mono: 'Open Sans Mono', 'Courier New', monospace;
 }
