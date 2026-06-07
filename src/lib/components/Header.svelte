@@ -3,7 +3,7 @@
 	let { header } = $props();
 </script>
 
-<header class="bg-base-300 py-4 border-b">
+<header class="bg-base-300 py-4 border-b sticky sm:top-32 top-28 z-50">
 	<div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex items-center">
 		{#each header as head, index}
 			{@const isLAst = index === header.length - 1}
