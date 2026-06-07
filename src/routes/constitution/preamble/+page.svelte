@@ -1,8 +1,12 @@
 <script>
 	import Header from '$lib/components/Header.svelte';
+	const items = [
+		{ name: 'Home', url: '/constitution' },
+		{ name: 'Preamble', url: '/constitution/preamble' }
+	];
 </script>
 
-<Header header="Preamble" />
+<Header header={items} />
 <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
 	<div
 		class="p-8 sm:p-12 border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 shadow-md rounded-xl md:text-base/12 text-base/10"
