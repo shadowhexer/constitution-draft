@@ -66,7 +66,7 @@
 					{#each section.subsection as subsection, index}
 						{@const subLength = section.subsection?.length > 1}
 						<p
-							class="leading-8 text-slate-700 dark:text-slate-300 md:text-lg md:border-l-4 pl-6 py-2 transition-all border-slate-200 dark:border-slate-800 {subLength
+							class="whitespace-pre-wrap leading-8 text-slate-700 dark:text-slate-300 md:text-lg md:border-l-4 pl-6 py-2 transition-all border-slate-200 dark:border-slate-800 {subLength
 								? 'md:ml-7'
 								: 'indent-10'}"
 						>
