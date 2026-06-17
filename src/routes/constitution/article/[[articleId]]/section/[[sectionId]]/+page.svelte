@@ -36,6 +36,24 @@
 		};
 	});
 
+	function handleKeydown(event) {
+		// 1. Guard: Don't change pages if the user is actively typing in a field
+		const target = event.target;
+		if (target.tagName === 'INPUT' || target.tagName === 'TEXTAREA' || target.isContentEditable) {
+			return;
+		}
+
+		// 2. Intercept Left Arrow -> Go to the computed prev path
+		if (event.key === 'ArrowLeft' && nav.prev !== '#') {
+			goto(nav.prev);
+		}
+
+		// 3. Intercept Right Arrow -> Go to the computed next path
+		if (event.key === 'ArrowRight' && nav.next !== '#') {
+			goto(nav.next);
+		}
+	}
+
 	let isMobile = $state(false);
 	onMount(() => {
 		// Match Tailwind's md breakpoint boundary (768px)
@@ -52,6 +70,8 @@
 		return () => mediaQuery.removeEventListener('change', handler);
 	});
 </script>
+
+<svelte:window on:keydown={handleKeydown} />
 
 <article class="mt-6 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
 	<section
