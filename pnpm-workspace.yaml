@@ -1,6 +1,0 @@
-allowBuilds:
-  esbuild: true
-minimumReleaseAgeExclude:
-  - '@sveltejs/load-config@0.1.1'
-  - svelte-check@4.6.0
-  - '@sveltejs/kit@2.63.0'
