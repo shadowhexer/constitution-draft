@@ -3,19 +3,19 @@
 	import Sky from '$lib/assets/sky.png';
 	import NightSky from '$lib/assets/sky_night.png';
 	import Icon from './Icon.svelte';
-	let isDim = $state(false);
-	$effect(() => {
-		const nextTheme = isDim ? 'dim' : 'light';
-		if (!document.startViewTransition) {
-			document.documentElement.setAttribute('data-theme', nextTheme);
-			return;
-		}
+	// let isDim = $state(false);
+	// $effect(() => {
+	// 	const nextTheme = isDim ? 'dim' : 'light';
+	// 	if (!document.startViewTransition) {
+	// 		document.documentElement.setAttribute('data-theme', nextTheme);
+	// 		return;
+	// 	}
 
-		// Trigger the animated transition
-		document.startViewTransition(() => {
-			document.documentElement.setAttribute('data-theme', nextTheme);
-		});
-	});
+	// 	// Trigger the animated transition
+	// 	document.startViewTransition(() => {
+	// 		document.documentElement.setAttribute('data-theme', nextTheme);
+	// 	});
+	// });
 </script>
 
 <div
@@ -43,7 +43,7 @@
 				>
 			</div>
 
-			<nav class="navbar flex justify-end py-5 flex-1">
+			<!-- <nav class="navbar flex justify-end py-5 flex-1">
 				<label class="swap swap-rotate">
 					<input type="checkbox" bind:checked={isDim} />
 					<Icon
@@ -56,7 +56,7 @@
 						class="swap-on h-10 w-10 fill-amber-200"
 					/>
 				</label>
-			</nav>
+			</nav> -->
 		</div>
 	</div>
 </div>

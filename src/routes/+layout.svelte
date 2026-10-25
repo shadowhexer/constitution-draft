@@ -1,10 +1,14 @@
 <script>
+    import { setContext } from 'svelte';
 	import favicon from '$lib/assets/favicon.svg';
 	import '../assets/app.css';
 	import { page } from '$app/state';
 	import Navbar from '$lib/components/Navbar.svelte';
+	import FloatingOptions from '$lib/components/FloatingOptions.svelte';
 
 	let { children } = $props();
+	let pageMode = $state(false);
+	setContext('pageMode', () => pageMode)
 
 	const article = $derived(page.data.articles?.find((a) => a.id == page.params.articleId));
 	const headerName = $derived(article?.id ? `${article.article} - ` : '');
@@ -21,3 +25,4 @@
 	<Navbar />
 	{@render children?.()}
 </div>
+<FloatingOptions bind:isRead={pageMode} />
